@@ -25,6 +25,66 @@ def find(lst, word):
 	indices = [i for i, x in enumerate(lst) if x == word]
 	return indices
 
+def Hangman():
+	hangman = ['''
+	  4.   +---+
+	  5.   |   |
+	  6.       |
+	  7.       |
+	  8.       |
+	  9.       |
+	 10. =========''', '''
+	 11.
+	 12.   +---+
+	 13.   |   |
+	 14.   O   |
+	 15.       |
+	 16.       |
+	 17.       |
+	 18. =========''', '''
+	 19.
+	 20.   +---+
+	 21.   |   |
+	 22.   O   |
+	 23.   |   |
+	 24.       |
+	 25.       |
+	 26. =========''', '''
+	 27.
+	 28.   +---+
+	 29.   |   |
+	 30.   O   |
+	 31.  /|   |
+	 32.       |
+	 33.       |
+	 34. =========''', '''
+	 35.
+	 36.   +---+
+	 37.   |   |
+	 38.   O   |
+	 39.  /|\  |
+	 40.       |
+	 41.       |
+	 42. =========''', '''
+	 43.
+	 44.   +---+
+	 45.   |   |
+	 46.   O   |
+	 47.  /|\  |
+	 48.  /    |
+	 49.       |
+	 50. =========''', '''
+	 51.
+	 52.   +---+
+	 53.   |   |
+	 54.   O   |
+	 55.  /|\  |
+	 56.  / \  |
+	 57.       |
+	 58. =========''']
+
+	return hangman
+
 
 
 def main():
@@ -36,7 +96,8 @@ def main():
 	game = vowels(check)
 	print(game)
 	hangman = 0
-	while (hangman < 4):
+	pic = Hangman()
+	while (hangman is not len(pic)):
 		user = input('Enter a letter \n>')
 		if (user in check):
 			indices = find(check, user)
@@ -44,15 +105,15 @@ def main():
 				del game[indices[i]]
 				game.insert(indices[i], user)
 		else:
+			print(pic[hangman])
 			hangman = hangman + 1
-			print(hangman)
 		print (game)
 		if (game == check):
 			break
 	if hangman < 4:
 		print ("Congrats, you won")
 	else:
-		print ("You lost")
+		print ("You lost, the word was %s" % ", ".join(map(str, check)))
 
 def OverallGameplay():
 	userInput = input("Do you want to play a game of hangman?\n>(YES OR NO)\t>")
