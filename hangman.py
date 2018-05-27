@@ -1,9 +1,13 @@
+#Things to fix:
+	#Need to allow all cases of letters
+	#Need to introduce a timer
+
 import random
 import os, csv
-import time
+from time import time
 
 def letterGenerator(word):
-	word = word
+	word = word.lower()
 	box = []
 	for i in range(0, len(word)):
 		box.append(word[i])
@@ -85,7 +89,10 @@ def Hangman():
 
 	return hangman
 
-
+def doubleEntry(xinput, game):
+	userInput = xinput
+	if userInput in game:
+		print ("Sorry, you already entered the letter, try again\n")	
 
 def main():
 	list = open("test.txt", "r")
@@ -99,6 +106,8 @@ def main():
 	pic = Hangman()
 	while (hangman is not len(pic)):
 		user = input('Enter a letter \n>')
+		user = user.lower()
+		doubleEntry(user, game)
 		if (user in check):
 			indices = find(check, user)
 			for i in range(0, len(indices)):
